@@ -10,14 +10,14 @@ public:
                     return true;
                     
                 }
-                mpp[nums[i]]=i;
+                
                 // return true;
 
             }
-
-            else{
-                mpp[nums[i]]=i;
-            }
+            mpp[nums[i]]=i;
+            // else{
+            //     mpp[nums[i]]=i;
+            // }
         }
         return false;
     }
