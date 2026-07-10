@@ -8,19 +8,33 @@
  */
 class Solution {
 public:
+    bool loopExist(ListNode* head,ListNode* &slow,ListNode* &fast){
+        
+        while(fast!=NULL){
+            fast=fast->next;
+            if (fast!=NULL){
+                fast=fast->next;
+                slow=slow->next;
+                if(fast==slow){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     ListNode *detectCycle(ListNode *head) {
-        map<ListNode*,bool>mp;
-        ListNode* temp=head;
-        while(temp!=NULL){
-            
-            
-            if(mp[temp]==true){
-                return temp;
+        ListNode* fast=head;
+        ListNode* slow=head;
+        bool isLoop=loopExist(head,slow,fast);
+        if (isLoop==true){
+            slow=head;
+            while(slow!=fast){
+                slow=slow->next;
+                fast=fast->next;
+
             }
-            else{
-                mp[temp]=true;
-            }
-            temp=temp->next;
+            return fast;
+
         }
         return NULL;
     }
