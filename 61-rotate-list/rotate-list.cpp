@@ -10,33 +10,30 @@
  */
 class Solution {
 public:
-    ListNode* revList(ListNode* head,ListNode* prev){
-        if(head==NULL ) return prev;
-       
-        ListNode* curr=head;
-        ListNode* next=curr->next;
-        curr->next=prev;
-        prev=curr;
-        
-        
-        return revList(next,prev);
-        
-    }
     ListNode* rotateRight(ListNode* head, int k) {
         if(head==NULL || head->next==NULL) return head;
-        ListNode* prevHead=head;
+        int count=0;
+        ListNode* temp=head;
         ListNode* prev=NULL;
-        head=revList(head,prev);
-        while(k>0){
-            ListNode* temp=head;
-            head=head->next;
-            temp->next=NULL;
-            prevHead->next=temp;
-            prevHead=prevHead->next;
-            k--;
+        while(temp!=NULL){
+            count++;
+            prev=temp;
+            temp=temp->next;
+
         }
-        head=revList(head,prev);
+        k = k % count;
+        int s = count - k;
+        // int s=abs(count-k);
+        ListNode* last=prev;
+        while(s>0 ){
+            prev=NULL;
+            prev=head;
+            head=head->next;
+            prev->next=NULL;
+            last->next=prev;
+            last=last->next;
+            s--;
+        }
         return head;
-        
     }
 };
