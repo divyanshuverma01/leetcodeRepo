@@ -3,6 +3,7 @@ public:
     int maxFrequencyElements(vector<int>& nums) {
         if(nums.empty()) return 0;
         map<int,int>mp;
+        int maxFreq=0;
         int size=nums.size();
         for(int i =0;i<size;i++){
             if(mp.find(nums[i])!=mp.end()){
@@ -10,14 +11,18 @@ public:
 
             }
             else mp[nums[i]]++;
-        }
-        int maxFreq=0;int count=0;
-        for(const auto ch:mp){
-            if(ch.second>maxFreq){
-                maxFreq=ch.second;
+            if(maxFreq<mp[nums[i]]) {
+                maxFreq=mp[nums[i]];
             }
-
         }
+        // int maxFreq=0;int count=0;
+        // for(const auto ch:mp){
+        //     if(ch.second>maxFreq){
+        //         maxFreq=ch.second;
+        //     }
+
+        // }
+        int count=0;
         for(const auto ch:mp){
             if(ch.second==maxFreq){
                 count+=maxFreq;
