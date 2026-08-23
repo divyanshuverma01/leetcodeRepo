@@ -6,16 +6,16 @@ public:
         int right=0;
         int len=0;
         while(right<s.size()){
-            while(st.find(s[right])!=st.end()){
+            if(st.find(s[right])==st.end()){
+                st.insert(s[right]);
+                len=max(len,right-left+1);
+                right++;
+                
+            }
+            else{
                 st.erase(s[left]);
                 left++;
-                }
-            st.insert(s[right]);
-            len=max(len,right-left+1);
-            right++;
-            
-            
-            
+            }
         }
 
         return len;
