@@ -1,18 +1,31 @@
 class Solution {
 public:
-    bool checkInclusion(string s1, string s2) {
-        int frameSize=s1.size();
-        if(frameSize>s2.size()) return false;
-        string sortS1=s1;
-        string sortS2=s2;
-        sort(sortS1.begin(),sortS1.end());
-        for(int i=0;i<s2.size();i++){
-            string sortS2=s2.substr(i,frameSize);
-            sort(sortS2.begin(),sortS2.end());
-            if(sortS2==sortS1){
-                return true;
-            }
+    bool freqCheck(int freq[],int winFreq[]){
+        for(int i=0;i<26;i++){
+            if(freq[i]!=winFreq[i]) return false;
         }
+        return true;
+    }
+    bool checkInclusion(string s1, string s2) {
+        int freq[26]={0};
+        for (int i=0;i<s1.size();i++){
+            freq[s1[i]-'a']++;
+        }
+        int windSize=s1.size();
+        for(int i=0;i<s2.size();i++){
+            int windIdx=0;
+            int idx=i;
+            int winFreq[26]={0};
+            while(windIdx<windSize && idx<s2.size()){
+                winFreq[s2[idx]-'a']++;
+                windIdx++;
+                idx++;
+
+                }
+            if(freqCheck(freq,winFreq)) return true;
+
+        }
+        
         return false;
     }
 };
